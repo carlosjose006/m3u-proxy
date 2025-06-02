@@ -31,8 +31,8 @@ module.exports = async (req, res) => {
     return res.end("#EXTM3U\n# ERROR: No se pudo obtener la lista de canales");
   }
 
-  const baseUrl = `${req.headers["x-forwarded-proto"]}://${req.headers.host}`;
-  let m3uContent = ["#EXTM3U\n"];
+  const baseUrl = `${req.headers["x-forwarded-proto"] || "https"}://${req.headers.host}`;
+  let m3uContent = ["#EXTM3U"];
 
   canales.forEach((canal) => {
     const streamUrl = `${baseUrl}/api/stream?streamId=${canal.stream_id}`;
